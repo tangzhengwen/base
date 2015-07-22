@@ -116,7 +116,59 @@ something like jQuery
 * `opt` String, **add**|**del**|**has**(default)
 * return Boolean or undefined
 
+### BASE.execFun(callback, _arg1_, _arg2_)
+* if callback is function then execute it
+* `callback` Function
+* return callback(arg1, arg2)
 
+### BASE.getPrefix(str)
+* get css3 prefix str
+* `str` String, e.g. `transition`, `transform`
+* return String, e.g. `webkitTransition`
+
+### BASE.getStorage(item, _attr_)
+* get data from localStorage
+* `item` String, record key
+* `attr` String, the data obj attribute value
+* return String or Others
+
+### BASE.setStorage(item, strobj)
+* set data to localStorage
+* `item` String, record key
+* `strobj` String,Object or Number
+* return undefined
+
+### BASE.newXhr()
+* return XMLHttpRequest
+
+### BASE.xhrRes(xhr, callback, errback)
+* handle XMLHttpRequest
+* `xhr` XMLHttpRequest
+* `callback`,`errback` Function
+* return undefined
+
+### BASE.ajax(options)
+* achieve 'ajax' communications
+* `options` Object
+
+    ```javascript
+    var defaults = {
+        url: '', //ajax request url
+        data: null, //url parameter, Object
+        method: 'GET', //request type
+        async: true, //asynchronous request
+        send: null, //send data
+        timeout: null, //unit ms，synchronous mode is the delay time
+        error: null, //communication error callback function
+        success: null  //communication success callback function, with callback parameter
+    };
+    ```
+
+### BASE.styleReady(id, cssnum, callback)
+* check style load ready
+* `id` String
+* `cssnum` Number
+* `callback` Function
 
 
 
