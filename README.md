@@ -150,6 +150,7 @@ something like jQuery
 ### BASE.ajax(options)
 * achieve 'ajax' communications
 * `options` Object
+* return undefined
 
     ```javascript
     var defaults = {
@@ -169,10 +170,43 @@ something like jQuery
 * `id` String
 * `cssnum` Number
 * `callback` Function
+* return undefined
 
+### BASE.txtReader(url, callback, _sync_)
+* reader file as txt
+* `url` String
+* `callback` Function
+* `sync` Boolean
+* return undefined
 
+### BASE.jsReader(url, _id_, _callback_)
+* reader js >ie8
+* `url` String
+* `id` String, tag id
+* `callback` Function, load js finish to call
+* return undefined
 
+### BASE.cssReader(url, _id_, _callback_)
+* reader css
+* `url` String
+* `id` String, tag id
+* `callback` Function, load js finish to call
+* return undefined
 
+### BASE.createStyle(styleStr, _id_, _callback_)
+* create css style tag
+* `styleStr` String, css style
+* `id` String, style tag id
+* `callback` Function, style ready to call
+* return undefined
+
+### BASE.adpAllStyle(styleStr, _id_, _callback_, _adp_)
+* create css style and change px to px*scale
+* `styleStr` String, css style
+* `id` String, style tag id
+* `callback` Function, style ready to call
+* `adp` Number, standard adp scale, default is **480**
+* return undefined
 
 # License
 [MIT](https://github.com/tangzhengwen/base/blob/master/LICENSE)
