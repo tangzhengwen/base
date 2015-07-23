@@ -24,7 +24,7 @@ something like jQuery
 * concat url
 * `url` String
 * `obj` Object
-* return String, e.g. `?a=1&b=123`
+* return String, e.g. `url?a=1&b=123`
 
 ### BASE.extendObj(srcObj, tarObj, _bool_, _subExtend_)
 * extend the source obj according to the target obj
@@ -45,7 +45,7 @@ something like jQuery
 
 ### BASE.strCompare(aStr, bStr, _splitDot_)
 * string compare
-* `bStr`,`aStr` String
+* `aStr`,`bStr` String
 * `splitDot` String, default is **'.'**
 * `aStr > bStr` return 1
 * `aStr < bStr` return -1
@@ -56,7 +56,7 @@ something like jQuery
 * numerical precision control
 * `val` Number or String, e.g. 123 or '123'
 * `bit` Number, precision, default is **0**
-* return Number, e.g. `BASE.dataRound('123.25', 1) === '123.3'`
+* return Number, e.g. `BASE.dataRound('123.25', 1) === 123.3`
 
 ### BASE.getCoord(e, _c_)
 * get event targe coord
@@ -113,7 +113,7 @@ something like jQuery
 * add cls or delete cls for ele
 * `ele` Element
 * `cls` String
-* `opt` String, **add**|**del**|**has**(default)
+* `opt` String, **'add'**|**'del'**|**'has'**(default)
 * return Boolean or undefined
 
 ### BASE.execFun(callback, _arg1_, _arg2_)
@@ -135,7 +135,7 @@ something like jQuery
 ### BASE.setStorage(item, strobj)
 * set data to localStorage
 * `item` String, record key
-* `strobj` String,Object or Number
+* `strobj` String, Object or Number
 * return undefined
 
 ### BASE.newXhr()
