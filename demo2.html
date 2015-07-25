@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+        <link href="css/demo.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>Hello World</div>
+
+        <script src="base.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            (function () {
+                if (!BASE.cfg.isTouch) //pc
+                    return BASE.disEle(document.body, 1);
+                var styleStr = 'div{font-size:28px;padding:20px 0;width:400px;box-shadow:1px 1px 10px #777}';
+                BASE.adpAllStyle(styleStr, 'mycss', function () {
+                    BASE.disEle(document.body, 1);
+                });
+            })();
+        </script>
+    </body>
+</html>
