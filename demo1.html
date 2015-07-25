@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+    </head>
+    <body style="display: none">
+        <div>Hello World</div>
+
+        <script src="base.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            (function () {
+                BASE.adpAllStyle('div{font-size:28px}', 'mycss', function () {
+                    BASE.disEle(document.body, 1);
+                });
+            })();
+        </script>
+    </body>
+</html>
