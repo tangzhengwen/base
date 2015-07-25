@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+        <link href="css/demo.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>Hello World</div>
+
+        <script src="base.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            (function () {
+                if (!BASE.cfg.isTouch) //pc
+                    return BASE.disEle(document.body, 1);
+                //通过<a href='code_base.html#txtReader'>BASE.txtReader</a>来将demo.adp.css文件读取成文本
+                BASE.txtReader('css/demo.adp.css', function (styleStr) {
+                    BASE.adpAllStyle(styleStr, 'mycss', function () {
+                        BASE.disEle(document.body, 1);
+                    });
+                });
+            })();
+        </script>
+    </body>
+</html>
