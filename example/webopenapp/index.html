@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+
+        <meta name="description" content="网页打开app">
+        <meta name="author" content="Don">
+
+        <title>Web Open App</title>
+
+        <link href="css/index.css?d=@@timestamp" rel="stylesheet">
+    </head>
+    <body ontouchstart="">
+        <div id="main">
+            <div id="nav">
+                <p>网页打开app</p>
+                <div>少骥网</div>
+            </div>
+
+            <div class="con">
+                <div class="con-head">
+                    测试使用网页打开手机原生应用
+                    <br>
+                    1.如果用户安装了应用则打开应用；
+                    <br>
+                    2.如果没有安装应用则引导用户安装；
+                </div>
+                <div class="con-body">
+                    <div id="lx" class="btn btn-danger btn-lg">开启灵犀语音助手</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- build:js js/index.js?d=@@timestamp -->
+        <script src="js/base.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+        <!-- endbuild -->
+
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?b2a31acfdcf74cfc6267b0a5d4521d22";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+
+        <meta name="description" content="web speech" />
+        <meta name="author" content="Don" />
+
+        <title>Web Speech</title>
+
+        <link href="css/index.css?d=@@timestamp" rel="stylesheet">
+    </head>
+    <body ontouchstart="">
+        <div id="main">
+            <div id="nav">
+                <p>web语音测试</p>
+                <div>少骥网</div>
+            </div>
+            <div id="info"></div>
+            <div id="cvsCon">
+                <div>频谱图</div>
+                <canvas id="cvs"></canvas>
+            </div>
+            <!--textarea id="textarea" cols="30" rows="5" disabled="disabled" placeholder="语音读写"></textarea-->
+            <div class="btnCon">
+                <div id="openBtn" class="btn btn-primary btn-lg">启用麦克风</div>
+            </div>
+            <div class="btnCon">
+                <div id="btnDisable"></div>
+                <div id="recordBtn" class="btn btn-warning">录音</div>
+                <div class="space1"></div>
+                <a id="save">
+                    <div id="outputBtn" class="btn btn-info">导出</div>
+                </a>
+                <div class="space2"></div>
+                <div id="listenBtn" class="btn btn-success">听声</div>
+<!--                <div class="space1"></div>
+                <div id="writeBtn" class="btn btn-primary">读写</div>-->
+            </div>
+            <audio id="audio" class="zero" autoplay="autoplay"></audio>
+        </div>
+
+        <!-- build:js js/index.js?d=@@timestamp -->
+        <script src="js/recorder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/base.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+        <!-- endbuild -->
+
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?55eef82c93a9c7f2505badfe645b7e57";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </body>
+</html>
+

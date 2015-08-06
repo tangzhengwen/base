@@ -1,0 +1,105 @@
+/**
+ * webscratch CSS
+ * index
+ * 2015-08-06
+ */
+
+*,*:before,*:after{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+body{
+    display: none;
+    background-color: #d8e5f0;
+    color: #333;
+    margin: 0;
+    position: relative;
+    font-family: "微软雅黑",Helvetica,Arial,sans-serif;
+
+    font-size: 18px;
+}
+div{
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+p{
+    margin: 0;
+}
+
+.zero{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    top: -100%;
+    left: -100%;
+}
+.fix{
+    position: fixed;
+    width: 100%;
+}
+
+#main{
+    background-color: white;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/*========== nav ==========*/
+#nav{
+    color: white;
+    text-align: center;
+    background-color: #999;
+
+    height: 70px;
+}
+#nav>p{
+    font-weight: bold;
+
+    line-height: 70px;
+    font-size: 32px;
+}
+#nav>div{
+    position: absolute;
+    font-style: italic;
+    right: 3%;
+
+    bottom: 4px;
+    font-size: 16px;
+}
+
+/*========== con ==========*/
+#con{
+    height: 480px;
+}
+#con>img{
+    width: 100%;
+    height: 100%;
+}
+canvas{
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*========== btm ==========*/
+#btm{
+    background-color: #999;
+    color: #fff;
+
+    padding: 10px 15px;
+}
+#btm>div{
+    margin: 5px 0;
+}
+#btm span{
+    font-weight: bold;
+}

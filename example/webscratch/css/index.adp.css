@@ -1,0 +1,37 @@
+/**
+ * webscratch CSS
+ * index
+ * 2015-08-06
+ */
+
+body{
+    font-size: 18px;
+}
+
+/*========== nav ==========*/
+#nav{
+    height: 70px;
+}
+#nav>p{
+    line-height: 70px;
+    font-size: 32px;
+    letter-spacing: 10px;
+}
+#nav>div{
+    font-size: 16px;
+    padding: 3px 7px;
+    border-radius: 0 0 0 4px;
+}
+
+/*========== con ==========*/
+#con{
+    height: 480px;
+}
+
+/*========== btm ==========*/
+#btm{
+   padding: 10px 15px;
+}
+#btm>div{
+    margin: 5px 0;
+}

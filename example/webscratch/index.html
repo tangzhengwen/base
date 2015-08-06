@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+
+        <meta name="description" content="网页刮刮乐">
+        <meta name="author" content="Don">
+
+        <title>Web Scratch</title>
+
+        <link href="css/index.css?d=@@timestamp" rel="stylesheet" type="text/css" />
+    </head>
+    <body ontouchstart="">
+        <div id="main">
+            <div id="nav">
+                <p>网页刮刮乐</p>
+                <div>少骥网</div>
+            </div>
+            <div id="con">
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="btm">
+                <div>
+                    设备像素比：<span id="dpr">null</span>
+                </div>
+                <div>
+                    位置坐标：X=<span id="cx">null</span>，Y=<span id="cy">null</span>
+                </div>
+                <div>
+                    MonteCarlo：all=<span id="ma">null</span>，num=<span id="mn">null</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- build:js js/index.js?d=@@timestamp -->
+        <script src="js/base.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+        <!-- endbuild -->
+
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?60867fdf921b92464e0a6ba9c71f57c1";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </body>
+</html>
