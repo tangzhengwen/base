@@ -60,11 +60,13 @@ p{
     line-height: 70px;
     font-size: 32px;
 }
-#nav>div{
+#nav>a{
     line-height: initial;
     position: absolute;
     font-style: italic;
     right: 3%;
+    color: #fff;
+    text-decoration: underline;
 
     bottom: 4px;
     font-size: 16px;
