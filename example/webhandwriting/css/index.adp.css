@@ -1,0 +1,65 @@
+/**
+ * webhandwriting CSS
+ * index adp
+ * 2015-09-06
+ */
+
+body{
+    font-size: 18px;
+}
+
+/*========== nav ==========*/
+#nav{
+    height: 70px;
+}
+#nav>p{
+    font-size: 32px;
+    line-height: 70px;
+}
+#nav>a{
+    font-size: 16px;
+    bottom: 4px;
+}
+
+/*========== con ==========*/
+#con{
+    height: 480px;
+}
+
+/*========== btm ==========*/
+#btm{
+    padding: 15px 0;
+}
+#btm .btn{
+    width: 100px;
+}
+
+/*========== btn ==========*/
+.btn{
+    border-radius: 4px;
+    padding: 8px 22px;
+    font-size: 18px;
+}
+.btn-lg{
+    padding: 10px 30px;
+    font-size: 24px;
+}
+
+/*========== dropdown ==========*/
+.caret {
+    margin-left: 2px;
+    border-bottom: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.dropdown-menu {
+    line-height: 40px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dropdown-menu>li>a {
+    padding: 0 20px;
+}

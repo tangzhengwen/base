@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="target-densitydpi=device-dpi,width=device-width,initial-scale=1,user-scalable=no" />
+
+        <meta name="description" content="网页笔迹">
+        <meta name="author" content="Don">
+
+        <title>Web Handwriting</title>
+
+        <link href="css/index.css?d=@@timestamp" rel="stylesheet" type="text/css" />
+    </head>
+    <body ontouchstart="">
+        <div id="main">
+            <div id="nav">
+                <p>网页笔迹</p>
+                <a href="http://tangzhengwen.com/">少骥网</a>
+            </div>
+            <div id="con">
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="btm">
+                <div id="disable"></div>
+                <div id="btn_type">
+                    <div id="btn_type_btn" class="btn btn-default">
+                        毛笔 <span class="caret"></span>
+                    </div>
+                    <ul id="btn_type_menu" class="dropdown-menu">
+                        <li><a>毛笔</a></li>
+                        <li><a>钢笔</a></li>
+                        <li><a>铅笔</a></li>
+                    </ul>
+                </div>
+                <div id="btn_color">
+                    <div id="btn_color_btn" class="btn btn-default">
+                        黑色 <span class="caret"></span>
+                    </div>
+                    <ul id="btn_color_menu" class="dropdown-menu">
+                        <li><a>黑色</a></li>
+                        <li><a>黄色</a></li>
+                        <li><a>绿色</a></li>
+                        <li><a>蓝色</a></li>
+                        <li><a>红色</a></li>
+                    </ul>
+                </div>
+
+                <div class="space1"></div>
+                <a id="btn_save" download="draw.jpg" class="btn btn-info disable">下载</a>
+                <div class="space1"></div>
+                <div id="btn_retry" class="btn btn-danger">重做</div>
+            </div>
+        </div>
+
+        <!-- build:js js/index.js?d=@@timestamp -->
+        <script src="js/base.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+        <!-- endbuild -->
+
+        <script>
+            var _hmt = _hmt || [];
+            (function () {
+                var hm = document.createElement("script");
+                hm.src = "//hm.baidu.com/hm.js?763b9dd293d8fddd3fa016e38dae0546";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+    </body>
+</html>

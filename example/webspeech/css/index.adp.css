@@ -20,12 +20,10 @@ body{
 #nav>p{
     line-height: 70px;
     font-size: 32px;
-    letter-spacing: 10px;
 }
-#nav>div{
+#nav>a{
+    bottom: 4px;
     font-size: 16px;
-    padding: 3px 7px;
-    border-radius: 0 0 0 4px;
 }
 
 #cvsCon{

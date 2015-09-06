@@ -129,7 +129,7 @@
     (function () {
         var styleStr;
         if (Touch) {
-            styleStr = 'body{font-size:22px}#nav{height:70px}#nav>p{line-height:70px;font-size:32px;letter-spacing:10px}#nav>div{font-size:16px;padding:3px 7px;border-radius:0 0 0 4px}.con-head{padding:15px 4%;line-height:40px}.con-body{padding:50px 4%}.btn{border-radius:4px;padding:8px 22px;font-size:18px}.btn-lg{padding:10px 30px;font-size:24px}#watchPanel_con{height:300px;bottom:-300px;border-radius:6px 6px 0 0}#watchPanel_title{font-size:28px;line-height:60px}#watchPanel_info{padding:40px 4%}#watchPanel_img{width:80px;height:80px;margin-top:-40px}#watchPanel_desc{padding-left:100px}';
+            styleStr = 'body{font-size:18px}#nav{height:70px}#nav>p{line-height:70px;font-size:32px}#nav>a{bottom:4px;font-size:16px}.con-head{padding:15px 4%;line-height:40px}.con-body{padding:50px 4%}.btn{border-radius:4px;padding:8px 22px;font-size:18px}.btn-lg{padding:10px 30px;font-size:24px}#watchPanel_con{height:300px;bottom:-300px;border-radius:6px 6px 0 0}#watchPanel_title{font-size:28px;line-height:60px}#watchPanel_info{padding:40px 4%}#watchPanel_img{width:80px;height:80px;margin-top:-40px}#watchPanel_desc{padding-left:100px}';
             $ADPALLSTYLE(styleStr, '', initialize);
         } else {
             styleStr = 'body{background-color:#d8e5f0}#main{width:480px;height:500px;overflow:hidden}#watchPanel{position:absolute}';

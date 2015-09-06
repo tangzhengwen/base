@@ -1,0 +1,293 @@
+/**
+ * webhandwriting CSS
+ * index
+ * 2015-09-06
+ */
+
+*,*:before,*:after{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+body{
+    display: none;
+    background-color: #d8e5f0;
+    color: #333;
+    margin: 0;
+    position: relative;
+    font-family: "微软雅黑",Helvetica,Arial,sans-serif;
+
+    font-size: 18px;
+}
+div{
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+p{
+    margin: 0;
+}
+
+.zero{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    top: -100%;
+    left: -100%;
+}
+.fix{
+    position: fixed;
+    width: 100%;
+}
+
+#main{
+    background-color: white;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/*========== nav ==========*/
+#nav{
+    color: white;
+    text-align: center;
+    background-color: #999;
+
+    height: 70px;
+}
+#nav>p{
+    font-weight: bold;
+
+    line-height: 70px;
+    font-size: 32px;
+}
+#nav>a{
+    position: absolute;
+    font-style: italic;
+    right: 3%;
+    color: #fff;
+    text-decoration: underline;
+
+    bottom: 4px;
+    font-size: 16px;
+}
+
+/*========== con ==========*/
+#con{
+    height: 480px;
+}
+canvas{
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*========== btm ==========*/
+#btm{
+    background-color: #999;
+    color: #fff;
+    text-align: center;
+
+    padding: 15px 0;
+}
+#btm>div{
+    display: inline-block;
+}
+#btm>a{
+    display: inline-block;
+}
+#btm .btn{
+    width: 100px;
+}
+.space1{
+    padding: 0 1%;
+}
+
+/*========== btn ==========*/
+.btn{
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    text-decoration: initial !important;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    border-radius: 4px;
+
+    padding: 8px 22px;
+    font-size: 18px;
+}
+.btn-lg{
+    margin: 0 2%;
+    padding: 10px 30px;
+    font-size: 24px;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-default:active{
+    color: #333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+}
+.btn-primary:active{
+    color: #fff;
+    background-color: #3276b1;
+    border-color: #285e8e;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.btn-danger:active{
+    color: #fff;
+    background-color: #d2322d;
+    border-color: #ac2925;
+}
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.btn-success:active{
+    color: #fff;
+    background-color: #47a447;
+    border-color: #398439;
+}
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.btn-info:active{
+    color: #fff;
+    background-color: #39b3d7;
+    border-color: #269abc;
+}
+.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+.btn-warning:active{
+    color: #fff;
+    background-color: #ed9c28;
+    border-color: #d58512;
+}
+
+/*========== disable ==========*/
+#disable{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.btn{
+    z-index: 2;
+}
+.disable{
+    z-index: 0;
+}
+
+/*========== dropdown ==========*/
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+
+    margin-left: 2px;
+    border-bottom: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.dropdown-menu {
+    position: absolute;
+    bottom: 110%;
+    left: 0;
+    z-index: 999;
+    display: none;
+    float: left;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    min-width: 100%;
+
+    line-height: 40px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dropdown-menu-right{
+    right: 0;
+    left: auto;
+}
+.dropdown-menu>li>a {
+    cursor: pointer;
+    display: block;
+    clear: both;
+    font-weight: 400;
+    color: #333;
+    white-space: nowrap;
+
+    padding: 0 20px;
+}
+.dropdown-menu > li > a:active{
+    color: #262626;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #428bca;
+    outline: 0;
+}
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:active {
+    color: #999;
+}
+.dropdown-menu > .disabled > a:active {
+    text-decoration: none;
+    cursor: not-allowed;
+    background-color: transparent;
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.open > .dropdown-menu {
+    display: block;
+}

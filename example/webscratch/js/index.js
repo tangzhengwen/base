@@ -167,7 +167,7 @@
     (function () {
         var styleStr;
         if (Touch) {
-            styleStr = 'body{font-size:18px}#nav{height:70px}#nav>p{line-height:70px;font-size:32px;letter-spacing:10px}#nav>div{font-size:16px;padding:3px 7px;border-radius:0 0 0 4px}#con{height:480px}#btm{padding:10px 15px}#btm>div{margin:5px 0}';
+            styleStr = 'body{font-size:18px}#nav{height:70px}#nav>p{line-height:70px;font-size:32px}#nav>a{bottom:4px;font-size:16px}#con{height:480px}#btm{padding:10px 15px}#btm>div{margin:5px 0}';
             $ADPALLSTYLE(styleStr, '', initialize);
         } else {
             styleStr = 'body{background-color:#d8e5f0}#main{width:480px}.fix{position:absolute}';

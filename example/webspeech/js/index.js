@@ -320,7 +320,7 @@
     (function () {
         var styleStr;
         if (Touch) {
-            styleStr = 'body{font-size:18px;line-height:40px}#main{padding-bottom:20px}#nav{height:70px}#nav>p{line-height:70px;font-size:32px;letter-spacing:10px}#nav>div{font-size:16px;padding:3px 7px;border-radius:0 0 0 4px}#cvsCon{height:200px}#cvsCon>div{line-height:200px;font-size:36px;letter-spacing:60px;text-indent:60px}#textarea{margin:15px 2%;font-size:20px}.btnCon{padding:30px 0 15px 0}.btn{border-radius:4px;padding:8px 22px;font-size:18px}.btn-lg{padding:10px 30px;font-size:24px}';
+            styleStr = 'body{font-size:18px;line-height:40px}#main{padding-bottom:20px}#nav{height:70px}#nav>p{line-height:70px;font-size:32px}#nav>a{bottom:4px;font-size:16px}#cvsCon{height:200px}#cvsCon>div{line-height:200px;font-size:36px;letter-spacing:60px;text-indent:60px}#textarea{margin:15px 2%;font-size:20px}.btnCon{padding:30px 0 15px 0}.btn{border-radius:4px;padding:8px 22px;font-size:18px}.btn-lg{padding:10px 30px;font-size:24px}';
             $ADPALLSTYLE(styleStr, '', initialize);
         } else {
             styleStr = '#main{width:480px}';
