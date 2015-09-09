@@ -121,7 +121,7 @@
             watchPanel[className] = '';
             setTimeout(function () {
                 $D(watchPanel);
-                callback && callback();
+                $EF(callback);
             }, 301);
         }
     }
