@@ -1,4 +1,4 @@
-# base
+# base v2.5.1
 reengineering wheel
 
 something like jQuery
@@ -104,9 +104,9 @@ something like jQuery
 * `isSelf` Boolean, true remove ele self, false remove ele children
 * return undefined
 
-### BASE.parEle(tarEle, parEle)
-* determine whether `parEle` is `tarEle`'s parent element
-* `tarEle`,`parEle` Element
+### BASE.parEle(tarElement, parElement)
+* determine whether `parElement` is `tarElement`'s parent element
+* `tarElement`,`parElement` Element
 * return Boolean
 
 ### BASE.dealCls(ele, cls, _opt_)
@@ -200,12 +200,13 @@ something like jQuery
 * `callback` Function, style ready to call
 * return undefined
 
-### BASE.adpAllStyle(styleStr, _id_, _callback_, _adp_)
+### BASE.adpAllStyle(styleStr, _id_, _callback_, _adp_, _isHeight_)
 * create css style and change px to px*scale
 * `styleStr` String, css style
 * `id` String, style tag id
 * `callback` Function, style ready to call
-* `adp` Number, standard adp scale, default is **480**
+* `adp` Number, standard adp scale, default is **480**(w) or **720**(h)
+* `isHeight` Boolean, adp according to innerHeight
 * return undefined
 
 # License

@@ -2,13 +2,21 @@
  * BASE Function JS
  * author: Don
  * copyright: http://tangzhengwen.com
- * update: 2015-07-22
- * version: 2.4.4
+ * update: 2015-09-21
+ * version: 2.5.1
  * desc:
- *      M note
+ *      WIN.BASE
  */
 
-var BASE = new function () {
+(function (name, factory) {
+    if (typeof define === "function" && define.amd) {
+        define(factory);
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = factory();
+    } else {
+        this[name] = factory();
+    }
+}('BASE', function () {
     var WIN = window,
             DOC = document,
             NAV = navigator,
@@ -18,7 +26,45 @@ var BASE = new function () {
             appendChild = "appendChild",
             style = "style",
             addEventListener = "addEventListener";
-    var CFG = {};
+    var CFG = {
+        isTouch: 'ontouchstart' in WIN  //Boolean, is touch device
+    };
+    var P = {
+        cfg: CFG,
+        /*===== No dependence =====*/
+        //tool
+        getUrl: getUrl,
+        concatUrl: concatUrl,
+        extendObj: extendObj,
+        jsonParse: jsonParse,
+        jsonStringify: jsonStringify,
+        strCompare: strCompare,
+        dataRound: dataRound,
+        getCoord: getCoord,
+        execFun: execFun,
+        newXhr: newXhr,
+        //dom
+        getEle: getEle,
+        creEle: creEle,
+        txtEle: txtEle,
+        disEle: disEle,
+        rmvEle: rmvEle,
+        parEle: parEle,
+        dealCls: dealCls,
+        /*===== No dependence =====*/
+        getPrefix: getPrefix, //creEle
+        xhrRes: xhrRes, //execFun
+        styleReady: styleReady, //execFun
+        getStorage: getStorage, //execFun,jsonParse
+        setStorage: setStorage, //jsonStringify
+        ajax: ajax, //concatUrl,newXhr,xhrRes,execFun
+        txtReader: txtReader, //newXhr,xhrRes,execFun
+        jsReader: jsReader, //execFun
+        cssReader: cssReader, //execFun,styleReady
+        createStyle: createStyle, //execFun,styleReady
+        adpAllStyle: adpAllStyle  //execFun,createStyle
+    };
+
     /*========== function ==========*/
     /*===== No dependence =====*/
     function getUrl(attr, ignore) {
@@ -34,7 +80,7 @@ var BASE = new function () {
         }
         var t = "", n;
         var reg = ignore ? 'gi' : 'g';
-        decodeURI(LOC.search).toString().replace(new RegExp("[?&]" + attr + "=[^&]+", reg), function (r) {
+        decodeURIComponent(LOC.search).toString().replace(new RegExp("[?&]" + attr + "=[^&]+", reg), function (r) {
             n = r.split("=")[1];
             n && (t = n);
         });
@@ -345,23 +391,23 @@ var BASE = new function () {
             }
         }
     }
-    function parEle(tarEle, parEle) {
+    function parEle(tarElement, parElement) {
         /**
-         * determine whether @parEle is @tarEle's parent element
-         * @tarEle,@parEle Element
+         * determine whether @parElement is @tarElement's parent element
+         * @tarElement,@parElement Element
          * return Boolean
          */
-        if (!tarEle || !parEle) {
-            console.log('%cBASE.js->parEle->Error:%c @tarEle & @parEle can not be empty', 'color: #ac2925', 'color: auto');
+        if (!tarElement || !parElement) {
+            console.log('%cBASE.js->parEle->Error:%c @tarElement & @parElement can not be empty', 'color: #ac2925', 'color: auto');
             return;
         }
-        if (!tarEle.parentElement)
+        if (!tarElement.parentElement)
             return false;
-        if (tarEle.parentElement === parEle)
+        if (tarElement.parentElement === parElement)
             return true;
-        if (tarEle.parentElement === DOC.body)
+        if (tarElement.parentElement === DOC.body)
             return false;
-        parEle(tarEle.parentElement, parEle);
+        parEle(tarElement.parentElement, parElement);
     }
     function dealCls(ele, cls, opt) {
         /**
@@ -487,7 +533,7 @@ var BASE = new function () {
          * return undefined
          */
         cssnum -= 0;
-        if (cssnum === NaN) {
+        if (isNaN(cssnum)) {
             console.log('%cBASE.js->styleReady->Error:%c @cssnum must be a Number', 'color: #ac2925', 'color: auto');
             return;
         }
@@ -566,7 +612,7 @@ var BASE = new function () {
             console.log('%cBASE.js->setStorage->Error:%c @item must be a String', 'color: #ac2925', 'color: auto');
             return;
         }
-        if (strobj === undefined || strobj === null || strobj === NaN) {
+        if (strobj === undefined || strobj === null || isNaN(strobj)) {
             console.log('%cBASE.js->setStorage->Error:%c @strobj can not be%c ' + strobj, 'color: #ac2925', 'color: auto', 'color:red');
             return;
         }
@@ -808,13 +854,14 @@ var BASE = new function () {
 
         styleReady(id, cssnum, callback);
     }
-    function adpAllStyle(styleStr, id, callback, adp) {
+    function adpAllStyle(styleStr, id, callback, adp, isHeight) {
         /**
          * create css style and change px to px*scale
          * @styleStr String, css style
          * @id String, style tag id
          * @callback Function, style ready to call
-         * @adp Number, standard adp scale, default is 480
+         * @adp Number, standard adp scale, default is 480(w) or 700(h)
+         * @isHeight Boolean, adp according to innerHeight
          * return undefined
          */
         if (!styleStr || typeof styleStr !== "string") {
@@ -822,9 +869,10 @@ var BASE = new function () {
             console.log('%cBASE.js->adpAllStyle->Error:%c @styleStr must be a String', 'color: #ac2925', 'color: auto');
             return;
         }
-        isNaN(adp - 0) && (adp = 480);
+        isNaN(adp - 0) && (isHeight ? adp = 700 : adp = 480);
         var adpAry = [320, 360, 480, 540, 640, 720, 768, 800, 1080];
-        globalAdp(dealNewWidth);
+        isHeight && (adpAry = [300, 400, 450, 500, 600, 650, 700, 750, 800, 900]);
+        globalAdp(dealNewSize);
 
         function globalAdp(callback) {
             var newStyleStr = '';
@@ -834,43 +882,49 @@ var BASE = new function () {
 
             function deal(i) {
                 var str = getStyleStr(styleStr, adpAry[i], adp);
-                newStyleStr += '@media(min-width:' + (adpAry[i] - 1) + 'px){' + str + '}';
+                newStyleStr += (isHeight ? '@media(min-height:' : '@media(min-width:') + (adpAry[i] - 1) + 'px){' + str + '}';
             }
         }
-        function isNewWidth() {
-            var width = WIN.innerWidth;
+        function isNewSize() {
+            var size = isHeight ? WIN.innerHeight : WIN.innerWidth;
             for (var i = 0; i < adpAry.length; i++) {
-                if (width === adpAry[i])
+                if (size === adpAry[i])
                     return;
             }
-            return width;
+            return size;
         }
-        function dealNewWidth() {
-            var width = isNewWidth();
-            if (!width)
-                return execFun(callback);
-            todo(width, function () {
+        function dealNewSize() {
+            var size = isNewSize();
+            if (!size) {
                 execFun(callback);
-                WIN[addEventListener]('resize', function () {
-                    var width = isNewWidth();
-                    width && todo(width);
-                });
+                return listenResize();
+            }
+            todo(size, function () {
+                execFun(callback);
+                listenResize();
             });
+
+            function listenResize() {
+                WIN[addEventListener]('resize', function () {
+                    var size = isNewSize();
+                    size && todo(size);
+                });
+            }
         }
-        function todo(width, callback) {
-            var newId = (id ? id : 'css') + '-' + width;
+        function todo(size, callback) {
+            var newId = (id ? id : 'css') + '-' + size;
             if (DOC.getElementById(newId))
                 return execFun(callback);
-            var str = getStyleStr(styleStr, width, adp);
-            var newStyleStr = '@media(width:' + width + 'px){' + str + '}';
+            var str = getStyleStr(styleStr, size, adp);
+            var newStyleStr = (isHeight ? '@media(height:' : '@media(width:') + size + 'px){' + str + '}';
             createStyle(newStyleStr, newId, callback);
         }
-        function getStyleStr(styleStr, nowWidth, adpWidth) {
+        function getStyleStr(styleStr, nowSize, adpSize) {
             var str = styleStr.replace(/-?\d+\.?\d*px/g, function (e) {
                 var num = parseFloat(e);
                 if (num === 1 || num === -1 || num === 0)
                     return num + 'px';
-                var a = num * nowWidth / adpWidth;
+                var a = num * nowSize / adpSize;
                 if (a > 0 && a < 1) {
                     a = 1;
                 } else if (a > -1 && a < 0) {
@@ -882,47 +936,8 @@ var BASE = new function () {
         }
     }
 
-    /*===== initialize =====*/
-    (function () {
-        CFG.isTouch = 'ontouchstart' in WIN;  //Boolean, is touch device
-        console.log('%cBASE.js->Info->CFG:%c %o', 'color: #269abc', 'color: auto', CFG);
-    })();
-
-    /*========== API ==========*/
-    var P = this;
-    P.cfg = CFG;
-
-    P.getUrl = getUrl;
-    P.concatUrl = concatUrl;
-    P.extendObj = extendObj;
-    P.jsonParse = jsonParse;
-    P.jsonStringify = jsonStringify;
-    P.strCompare = strCompare;
-    P.dataRound = dataRound;
-    P.getCoord = getCoord;
-
-    P.getEle = getEle;
-    P.creEle = creEle;
-    P.txtEle = txtEle;
-    P.disEle = disEle;
-    P.rmvEle = rmvEle;
-    P.parEle = parEle;
-    P.dealCls = dealCls;
-
-    P.execFun = execFun;
-    P.newXhr = newXhr;
-
-    P.getPrefix = getPrefix;  //creEle
-    P.xhrRes = xhrRes;  //execFun
-    P.styleReady = styleReady;  //execFun
-    P.getStorage = getStorage;  //execFun,jsonParse
-    P.setStorage = setStorage;  //jsonStringify
-    P.ajax = ajax;  //concatUrl,newXhr,xhrRes,execFun
-    P.txtReader = txtReader;  //newXhr,xhrRes,execFun
-    P.jsReader = jsReader;  //execFun
-    P.cssReader = cssReader;  //execFun,styleReady
-    P.createStyle = createStyle;  //execFun,styleReady
-    P.adpAllStyle = adpAllStyle;  //execFun,createStyle
-
     /*========== Private API ==========*/
-};
+
+    WIN && typeof WIN === 'object' && (WIN.BASE = P);
+    return P;
+}));
