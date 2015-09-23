@@ -205,7 +205,7 @@ something like jQuery
 * `styleStr` String, css style
 * `id` String, style tag id
 * `callback` Function, style ready to call
-* `adp` Number, standard adp scale, default is **480**(w) or **720**(h)
+* `adp` Number, standard adp scale, default is **480**(w) or **700**(h)
 * `isHeight` Boolean, adp according to innerHeight
 * return undefined
 
