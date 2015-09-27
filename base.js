@@ -2,16 +2,17 @@
  * BASE Function JS
  * author: Don
  * copyright: http://tangzhengwen.com
- * update: 2015-09-21
- * version: 2.5.1
+ * update: 2015-09-27
+ * version: 2.5.3
  * desc:
- *      WIN.BASE
+ *      remove AMD
  */
 
 (function (name, factory) {
-    if (typeof define === "function" && define.amd) {
-        define(factory);
-    } else if (typeof module === "object" && module.exports) {
+//    if (typeof define === "function" && define.amd) {
+//        define(factory);
+//    } else
+    if (typeof module === "object" && module.exports) {
         module.exports = factory();
     } else {
         this[name] = factory();
@@ -612,7 +613,7 @@
             console.log('%cBASE.js->setStorage->Error:%c @item must be a String', 'color: #ac2925', 'color: auto');
             return;
         }
-        if (strobj === undefined || strobj === null || isNaN(strobj)) {
+        if (strobj === undefined || strobj === null) {
             console.log('%cBASE.js->setStorage->Error:%c @strobj can not be%c ' + strobj, 'color: #ac2925', 'color: auto', 'color:red');
             return;
         }
