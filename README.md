@@ -1,4 +1,4 @@
-# base v2.5.1
+# base v2.5.4
 reengineering wheel
 
 something like jQuery
@@ -63,6 +63,12 @@ something like jQuery
 * `e` Event
 * `c` String, **'Y'** or **'X'**(default)
 * return Number
+
+### BASE.cssPxChange(styleStr, adpRate)
+* change style px value to adp*value
+* `styleStr` String, css style
+* `adpRate` Number, adp rate except **0**
+* return String
 
 ### BASE.getEle(str)
 * get DOM Element
@@ -200,13 +206,42 @@ something like jQuery
 * `callback` Function, style ready to call
 * return undefined
 
-### BASE.adpAllStyle(styleStr, _id_, _callback_, _adp_, _isHeight_)
+### BASE.adpAryScopeStyle(styleStr, adpAry, adp, _bool_, _id_, _callback_)
+* create css style in an adp array scope
+* `styleStr` String, css style
+* `adpAry` Array, adp style point array
+* `adp` Number, standard adp scale
+* `bool` Boolean, adp according to innerHeight
+* `id` String, style tag id
+* `callback` Function, style ready to call
+* return undefined
+
+### BASE.adpOneAbsStyle(styleStr, size, adp, _bool_, _id_, _callback_)
+* create css style in absolute size
+* `styleStr` String, css style
+* `size` Number, adp absolute size
+* `adp` Number, standard adp scale
+* `bool` Boolean, adp according to innerHeight
+* `id` String, style tag id
+* `callback` Function, style ready to call
+* return undefined
+
+### BASE.adpAllStyle(styleStr, _id_, _callback_, _adp_, _bool_)
 * create css style and change px to px*scale
 * `styleStr` String, css style
 * `id` String, style tag id
 * `callback` Function, style ready to call
 * `adp` Number, standard adp scale, default is **480**(w) or **700**(h)
-* `isHeight` Boolean, adp according to innerHeight
+* `bool` Boolean, adp according to innerHeight
+* return undefined
+
+### BASE.adpRateStyle(styleStr, _id_, _callback_, _width_, _height_)
+* create css style and change px to px*scale according width : height
+* `styleStr` String, css style
+* `id` String, style tag id
+* `callback` Function, style ready to call
+* `width` Number, width standard adp scale, default is **480**
+* `height` Number, height standard adp scale, default is **690**
 * return undefined
 
 # License

@@ -2,10 +2,11 @@
  * BASE Function JS
  * author: Don
  * copyright: http://tangzhengwen.com
- * update: 2015-09-27
- * version: 2.5.3
+ * update: 2015-10-23
+ * version: 2.5.4
  * desc:
- *      remove AMD
+ *      + cssPxChange, adpAryScopeStyle, adpOneAbsStyle, adpRateStyle
+ *      M adpAllStyle
  */
 
 (function (name, factory) {
@@ -27,6 +28,8 @@
             appendChild = "appendChild",
             style = "style",
             addEventListener = "addEventListener";
+    var adpWidthAry = [320, 360, 480, 540, 640, 720, 768, 800, 1080];
+    var adpHeightAry = [300, 400, 450, 500, 600, 650, 690, 750, 800];
     var CFG = {
         isTouch: 'ontouchstart' in WIN  //Boolean, is touch device
     };
@@ -42,6 +45,7 @@
         strCompare: strCompare,
         dataRound: dataRound,
         getCoord: getCoord,
+        cssPxChange: cssPxChange,
         execFun: execFun,
         newXhr: newXhr,
         //dom
@@ -63,7 +67,10 @@
         jsReader: jsReader, //execFun
         cssReader: cssReader, //execFun,styleReady
         createStyle: createStyle, //execFun,styleReady
-        adpAllStyle: adpAllStyle  //execFun,createStyle
+        adpAryScopeStyle: adpAryScopeStyle, //cssPxChange,createStyle
+        adpOneAbsStyle: adpOneAbsStyle, //cssPxChange,createStyle
+        adpAllStyle: adpAllStyle, //execFun,createStyle
+        adpRateStyle: adpRateStyle, //execFun,adpAryScopeStyle,adpOneAbsStyle getAdpNewSize
     };
 
     /*========== function ==========*/
@@ -262,6 +269,36 @@
         (c !== 'Y' && c !== 'y') && (c = 'X');
         c = c.toUpperCase();
         return ct || (org && org.changedTouches) ? (org ? org.changedTouches[0]['page' + c] : ct[0]['page' + c]) : e['page' + c];
+    }
+    function cssPxChange(styleStr, adpRate) {
+        /**
+         * change style px value to adp*value
+         * @styleStr String, css style
+         * @adpRate Number, adp rate except 0
+         * return String
+         */
+        if (!styleStr || typeof styleStr !== "string") {
+            console.log('%cBASE.js->cssPxChange->Error:%c @styleStr must be a String', 'color: #ac2925', 'color: auto');
+            return;
+        }
+        adpRate -= 0;
+        if (!adpRate || isNaN(adpRate)) {
+            console.log('%cBASE.js->cssPxChange->Error:%c @adpRate must be a Number except 0', 'color: #ac2925', 'color: auto');
+            return;
+        }
+        var num, val;
+        return styleStr.replace(/-?\d+\.?\d*px/g, function (e) {
+            num = parseFloat(e);
+            if (num === 1 || num === -1 || num === 0)
+                return num + 'px';
+            val = num * adpRate;
+            if (val > 0 && val < 1) {
+                val = 1;
+            } else if (val > -1 && val < 0) {
+                val = -1;
+            }
+            return val + "px";
+        });
     }
 
     function getEle(str) {
@@ -855,14 +892,71 @@
 
         styleReady(id, cssnum, callback);
     }
-    function adpAllStyle(styleStr, id, callback, adp, isHeight) {
+    function adpAryScopeStyle(styleStr, adpAry, adp, bool, id, callback) {
+        /**
+         * create css style in an adp array scope
+         * @styleStr String, css style
+         * @adpAry Array, adp style point array
+         * @adp Number, standard adp scale
+         * @bool Boolean, adp according to innerHeight
+         * @id String, style tag id
+         * @callback Function, style ready to call
+         * return undefined
+         */
+        if (!styleStr || typeof styleStr !== "string" ||
+                !adpAry || !adpAry.length ||
+                !adp || isNaN(adp - 0)) {
+            execFun(callback);
+            console.log('%cBASE.js->adpAryScopeStyle->Error:%c parameter type error', 'color: #ac2925', 'color: auto');
+            return;
+        }
+
+        var csspre = '@media(min-';
+        var newStyleStr = '';
+        for (var i = 0; i < adpAry.length; i++)
+            deal(i);
+        createStyle(newStyleStr, id, callback);
+
+        function deal(i) {
+            var str = cssPxChange(styleStr, adpAry[i] / adp);
+            newStyleStr += (bool ? csspre + 'height:' : csspre + 'width:') + (adpAry[i] - 1) + 'px){' + str + '}';
+        }
+    }
+    function adpOneAbsStyle(styleStr, size, adp, bool, id, callback) {
+        /**
+         * create css style in absolute size
+         * @styleStr String, css style
+         * @size Number, adp absolute size
+         * @adp Number, standard adp scale
+         * @bool Boolean, adp according to innerHeight
+         * @id String, style tag id
+         * @callback Function, style ready to call
+         * return undefined
+         */
+        if (!styleStr || typeof styleStr !== "string" ||
+                !size || isNaN(size - 0) ||
+                !adp || isNaN(adp - 0)) {
+            execFun(callback);
+            console.log('%cBASE.js->adpOneAbsStyle->Error:%c parameter type error', 'color: #ac2925', 'color: auto');
+            return;
+        }
+
+        var csspre = '@media(';
+        var newId = (id ? id : 'css') + '-' + size;
+        if (DOC.getElementById(newId))
+            return execFun(callback);
+        var str = cssPxChange(styleStr, size / adp);
+        var newStyleStr = (bool ? csspre + 'height:' : csspre + 'width:') + size + 'px){' + str + '}';
+        createStyle(newStyleStr, newId, callback);
+    }
+    function adpAllStyle(styleStr, id, callback, adp, bool) {
         /**
          * create css style and change px to px*scale
          * @styleStr String, css style
          * @id String, style tag id
          * @callback Function, style ready to call
-         * @adp Number, standard adp scale, default is 480(w) or 700(h)
-         * @isHeight Boolean, adp according to innerHeight
+         * @adp Number, standard adp scale, default is 480(w) or 690(h)
+         * @bool Boolean, adp according to innerHeight
          * return undefined
          */
         if (!styleStr || typeof styleStr !== "string") {
@@ -870,75 +964,82 @@
             console.log('%cBASE.js->adpAllStyle->Error:%c @styleStr must be a String', 'color: #ac2925', 'color: auto');
             return;
         }
-        isNaN(adp - 0) && (isHeight ? adp = 700 : adp = 480);
-        var adpAry = [320, 360, 480, 540, 640, 720, 768, 800, 1080];
-        isHeight && (adpAry = [300, 400, 450, 500, 600, 650, 700, 750, 800, 900]);
-        globalAdp(dealNewSize);
+        CFG.adpType = bool ? 'height' : 'width';
+        isNaN(adp - 0) && (bool ? adp = 690 : adp = 480);
+        var adpAry = bool ? adpHeightAry : adpWidthAry;
+        adpAryScopeStyle(styleStr, adpAry, adp, bool, id, dealNewSize);
 
-        function globalAdp(callback) {
-            var newStyleStr = '';
-            for (var i = 0; i < adpAry.length; i++)
-                deal(i);
-            createStyle(newStyleStr, id, callback);
+        function dealNewSize() {
+            var size = getAdpNewSize(bool, adpAry);
+            if (!size)
+                return deal();
+            adpOneAbsStyle(styleStr, size, adp, bool, id, deal);
 
-            function deal(i) {
-                var str = getStyleStr(styleStr, adpAry[i], adp);
-                newStyleStr += (isHeight ? '@media(min-height:' : '@media(min-width:') + (adpAry[i] - 1) + 'px){' + str + '}';
+            function deal() {
+                execFun(callback);
+                WIN[addEventListener]('resize', function () {
+                    size = getAdpNewSize(bool, adpAry);
+                    size && adpOneAbsStyle(styleStr, size, adp, bool, id);
+                });
             }
         }
-        function isNewSize() {
-            var size = isHeight ? WIN.innerHeight : WIN.innerWidth;
+    }
+    function adpRateStyle(styleStr, id, callback, width, height) {
+        /**
+         * create css style and change px to px*scale according width : height
+         * @styleStr String, css style
+         * @id String, style tag id
+         * @callback Function, style ready to call
+         * @width Number, width standard adp scale, default is 480
+         * @height Number, height standard adp scale, default is 690
+         * return undefined
+         */
+        if (!styleStr || typeof styleStr !== "string") {
+            execFun(callback);
+            console.log('%cBASE.js->adpRateStyle->Error:%c @styleStr must be a String', 'color: #ac2925', 'color: auto');
+            return;
+        }
+        !id && (id = 'css');
+        isNaN(width - 0) && (width = 480);
+        isNaN(height - 0) && (height = 690);
+        var bool, adp, adpAry;
+        resetVar();
+        adpAryScopeStyle(styleStr, adpAry, adp, bool, id, dealNewSize);
+
+        function resetVar() {
+            bool = WIN.innerWidth / WIN.innerHeight > width / height;
+            adp = bool ? height : width;
+            adpAry = bool ? adpHeightAry : adpWidthAry;
+            CFG.adpType = 'rate-' + (bool ? 'h' : 'w');
+        }
+        function dealNewSize() {
+            var size = getAdpNewSize(bool, adpAry);
+            if (!size)
+                return deal();
+            adpOneAbsStyle(styleStr, size, adp, bool, id, deal);
+
+            function deal() {
+                execFun(callback);
+                WIN[addEventListener]('resize', function () {
+                    resetVar();
+                    adpOneAbsStyle(styleStr, getAdpNewSize(bool), adp, bool, id + (bool ? '-h' : '-w'));
+                });
+            }
+        }
+    }
+
+    /*===== temp =====*/
+    function getAdpNewSize(bool, adpAry) {
+        var size = bool ? WIN.innerHeight : WIN.innerWidth;
+        if (adpAry)
             for (var i = 0; i < adpAry.length; i++) {
                 if (size === adpAry[i])
                     return;
             }
-            return size;
-        }
-        function dealNewSize() {
-            var size = isNewSize();
-            if (!size) {
-                execFun(callback);
-                return listenResize();
-            }
-            todo(size, function () {
-                execFun(callback);
-                listenResize();
-            });
-
-            function listenResize() {
-                WIN[addEventListener]('resize', function () {
-                    var size = isNewSize();
-                    size && todo(size);
-                });
-            }
-        }
-        function todo(size, callback) {
-            var newId = (id ? id : 'css') + '-' + size;
-            if (DOC.getElementById(newId))
-                return execFun(callback);
-            var str = getStyleStr(styleStr, size, adp);
-            var newStyleStr = (isHeight ? '@media(height:' : '@media(width:') + size + 'px){' + str + '}';
-            createStyle(newStyleStr, newId, callback);
-        }
-        function getStyleStr(styleStr, nowSize, adpSize) {
-            var str = styleStr.replace(/-?\d+\.?\d*px/g, function (e) {
-                var num = parseFloat(e);
-                if (num === 1 || num === -1 || num === 0)
-                    return num + 'px';
-                var a = num * nowSize / adpSize;
-                if (a > 0 && a < 1) {
-                    a = 1;
-                } else if (a > -1 && a < 0) {
-                    a = -1;
-                }
-                return a + "px";
-            });
-            return str;
-        }
+        return size;
     }
 
     /*========== Private API ==========*/
 
-    WIN && typeof WIN === 'object' && (WIN.BASE = P);
     return P;
 }));
