@@ -2,11 +2,10 @@
  * BASE Function JS
  * author: Don
  * copyright: http://tangzhengwen.com
- * update: 2015-10-23
- * version: 2.5.4
+ * update: 2016-01-08
+ * version: 2.5.6
  * desc:
- *      + cssPxChange, adpAryScopeStyle, adpOneAbsStyle, adpRateStyle
- *      M adpAllStyle
+ *      M concatUrl
  */
 
 (function (name, factory) {
@@ -88,9 +87,9 @@
         }
         var t = "", n;
         var reg = ignore ? 'gi' : 'g';
-        decodeURIComponent(LOC.search).toString().replace(new RegExp("[?&]" + attr + "=[^&]+", reg), function (r) {
+        LOC.search.toString().replace(new RegExp("[?&]" + attr + "=[^&]+", reg), function (r) {
             n = r.split("=")[1];
-            n && (t = n);
+            n && (t = decodeURIComponent(n));
         });
 
         console.log('%cBASE.js->getUrl->Info:%c ' + t, 'color: #269abc', 'color: auto');
@@ -117,7 +116,7 @@
             url += '&';
         }
         for (var va in obj) {
-            url += va + "=" + obj[va] + "&";
+            url += va + "=" + encodeURIComponent(obj[va]) + "&";
         }
         var len = url.length;
         if (url[len - 1] === '&' || url[len - 1] === '?') {
