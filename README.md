@@ -1,4 +1,4 @@
-# base v2.5.4
+# base v2.5.11
 reengineering wheel
 
 something like jQuery
@@ -31,14 +31,14 @@ something like jQuery
 * `srcObj`,`tarObj` Object
 * `bool` Boolean, true tar is srcObj else is tarObj
 * `subExtend` Boolean, extend sub obj
-* return undefined
+* return srcObj
 
 ### BASE.jsonParse(txt)
 * try to catch JOSN parse error
 * `txt` String
 * return Object
 
-### BASE.jsonStringify(obj)
+### BASE.jsonStringify(obj, _replacer_, _space_)
 * try to catch JOSN stringify error
 * `obj` Object
 * return String

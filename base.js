@@ -2,10 +2,10 @@
  * BASE Function JS
  * author: Don
  * copyright: http://tangzhengwen.com
- * update: 2016-01-08
- * version: 2.5.6
+ * update: 2016-03-21
+ * version: 2.5.11
  * desc:
- *      M concatUrl
+ *      M jsonStringify
  */
 
 (function (name, factory) {
@@ -116,7 +116,8 @@
             url += '&';
         }
         for (var va in obj) {
-            url += va + "=" + encodeURIComponent(obj[va]) + "&";
+            if (obj[va] !== undefined)
+                url += va + "=" + encodeURIComponent(obj[va]) + "&";
         }
         var len = url.length;
         if (url[len - 1] === '&' || url[len - 1] === '?') {
@@ -131,7 +132,7 @@
          * @srcObj,@tarObj Object
          * @bool Boolean, true tar is srcObj else is tarObj
          * @subExtend Boolean, extend sub obj
-         * return undefined
+         * return srcObj
          */
         if (typeof srcObj !== "object" || typeof tarObj !== "object") {
             console.log('%cBASE.js->extendObj->Error:%c @srcObj & @tarObj must be a Object', 'color: #ac2925', 'color: auto');
@@ -147,14 +148,17 @@
                     srcObj[va] = tarObj[va];
             }
         }
+
         console.log('%cBASE.js->extendObj->Info:%c %o', 'color: #269abc', 'color: auto', srcObj);
+        return srcObj;
 
         function dealSubExtend(attr) {
             if (typeof tarObj[attr] === "object") {
                 if (typeof srcObj[attr] === "object") {
-                    for (var val in tarObj[attr]) {
-                        srcObj[attr][val] = tarObj[attr][val];
-                    }
+                    extendObj(srcObj[attr], tarObj[attr], bool, subExtend);
+//                    for (var val in tarObj[attr]) {
+//                        srcObj[attr][val] = tarObj[attr][val];
+//                    }
                 } else {
                     srcObj[attr] = tarObj[attr];
                 }
@@ -178,7 +182,7 @@
         }
         return ret;
     }
-    function jsonStringify(obj) {
+    function jsonStringify(obj, replacer, space) {
         /**
          * try to catch JOSN stringify error
          * @obj Object
@@ -186,7 +190,7 @@
          */
         var ret;
         try {
-            ret = JSON.stringify(obj);
+            ret = JSON.stringify(obj, replacer, space);
         } catch (e) {
             console.log('%cBASE.js->jsonStringify->Error:%c JSON.stringify error - %c' + e, 'color: #ac2925', 'color: auto', 'color: red');
         }
@@ -498,7 +502,7 @@
          * return callback(arg1, arg2)
          */
         if (typeof callback === 'function') {
-            callback(arg1, arg2);
+            return callback(arg1, arg2);
         } else {
             console.log('%cBASE.js->execFun->Warn:%c @callback is not a function', 'color: #d58512', 'color: auto');
         }
