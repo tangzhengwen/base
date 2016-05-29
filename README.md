@@ -1,4 +1,4 @@
-# base v2.5.11
+# base v2.5.12
 reengineering wheel
 
 something like jQuery
@@ -235,13 +235,14 @@ something like jQuery
 * `bool` Boolean, adp according to innerHeight
 * return undefined
 
-### BASE.adpRateStyle(styleStr, _id_, _callback_, _width_, _height_)
+### BASE.adpRateStyle(styleStr, _id_, _callback_, _width_, _height_, _isMini_)
 * create css style and change px to px*scale according width : height
 * `styleStr` String, css style
 * `id` String, style tag id
 * `callback` Function, style ready to call
 * `width` Number, width standard adp scale, default is **480**
 * `height` Number, height standard adp scale, default is **690**
+* `isMini` Boolean, is mini adp rate
 * return undefined
 
 # License

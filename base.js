@@ -2,10 +2,10 @@
  * BASE Function JS
  * author: Don
  * copyright: http://tangzhengwen.com
- * update: 2016-03-21
- * version: 2.5.11
+ * update: 2016-05-21
+ * version: 2.5.12
  * desc:
- *      M jsonStringify
+ *      M adpRateStyle + isMini
  */
 
 (function (name, factory) {
@@ -987,7 +987,7 @@
             }
         }
     }
-    function adpRateStyle(styleStr, id, callback, width, height) {
+    function adpRateStyle(styleStr, id, callback, width, height, isMini) {
         /**
          * create css style and change px to px*scale according width : height
          * @styleStr String, css style
@@ -1013,10 +1013,16 @@
             bool = WIN.innerWidth / WIN.innerHeight > width / height;
             adp = bool ? height : width;
             adpAry = bool ? adpHeightAry : adpWidthAry;
+            if(isMini) {
+                for(var i = 0; i < adpAry.length; i++)
+                    if(adpAry[i] > adp)
+                        break;
+                adpAry = adpAry.slice(i);
+            }
             CFG.adpType = 'rate-' + (bool ? 'h' : 'w');
         }
         function dealNewSize() {
-            var size = getAdpNewSize(bool, adpAry);
+            var size = getAdpNewSize(bool, adpAry, isMini ? adp : '');
             if (!size)
                 return deal();
             adpOneAbsStyle(styleStr, size, adp, bool, id, deal);
@@ -1025,15 +1031,16 @@
                 execFun(callback);
                 WIN[addEventListener]('resize', function () {
                     resetVar();
-                    adpOneAbsStyle(styleStr, getAdpNewSize(bool), adp, bool, id + (bool ? '-h' : '-w'));
+                    adpOneAbsStyle(styleStr, getAdpNewSize(bool, '', isMini ? adp : ''), adp, bool, id + (bool ? '-h' : '-w'));
                 });
             }
         }
     }
 
     /*===== temp =====*/
-    function getAdpNewSize(bool, adpAry) {
+    function getAdpNewSize(bool, adpAry, miniSize) {
         var size = bool ? WIN.innerHeight : WIN.innerWidth;
+        miniSize && size <= miniSize && (size = miniSize);
         if (adpAry)
             for (var i = 0; i < adpAry.length; i++) {
                 if (size === adpAry[i])
