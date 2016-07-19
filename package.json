@@ -1,0 +1,31 @@
+{
+    "name": "base",
+    "version": "1.0.0",
+    "description": "a reengineering wheel, something like jQuery.",
+    "main": "base.js",
+    "directories": {
+        "example": "example"
+    },
+    "scripts": {
+        "build": "webpack",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tangzhengwen/base.git"
+    },
+    "keywords": [
+        "base",
+        "wheel",
+        "jQuery"
+    ],
+    "author": "gejiawen <806717031@qq.com> (http://gejiawen.github.io/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/tangzhengwen/base/issues"
+    },
+    "homepage": "https://github.com/tangzhengwen/base#readme",
+    "devDependencies": {
+        "webpack": "^1.13.1"
+    }
+}
